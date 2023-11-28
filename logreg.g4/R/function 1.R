@@ -19,6 +19,6 @@
 #' @examples
 #' set.seed(100)
 #' logreg(predict = x, response = y, beta = Beta)
-#' x <- martix(rnorm(200), nrow = 20)
+#' x <- matrix(rnorm(200), nrow = 20)
 #' y <-
 logreg
