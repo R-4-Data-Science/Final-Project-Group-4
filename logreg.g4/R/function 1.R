@@ -2,7 +2,7 @@
 
 
 #copy/pasted from book to edit later:
-#' @title Function 1
+#' @title Logistic Regression
 #'
 #' @description Compute an approximation of the integral of the function f(x)
 #' with respect to dx in the range [a, b] by Monte-Carlo integration using
