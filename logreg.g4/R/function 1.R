@@ -14,7 +14,11 @@
 #' \describe{
 #'      \item{B}{the estimated Beta coefficient}
 #' @author Ava White
-#' @importFrom
+#' @importFrom stats
 #' @export
 #' @examples
-#' logreg(predict = x, response = y, beta = Beta, seed = set.seed(100))
+#' set.seed(100)
+#' logreg(predict = x, response = y, beta = Beta)
+#' x <- martix(rnorm(200), nrow = 20)
+#' y <-
+logreg
