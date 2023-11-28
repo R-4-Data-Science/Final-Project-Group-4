@@ -1,12 +1,9 @@
 #This file is to code Function 1 (logistic regression).
 
-
-#copy/pasted from book to edit later:
 #' @title Logistic Regression
 #'
-#' @description Compute an approximation of the integral of the function f(x)
-#' with respect to dx in the range [a, b] by Monte-Carlo integration using
-#' uniform sampling.
+#' @description Perform a logistic regression using numerical optimization
+#' to estimate the coefficient vector Beta.
 #' @param x_range A \code{vector} of dimension 2 used to denote the integration
 #' region of interest, i.e. [a, b].
 #' @param fun A \code{string} containing the function to be integrated. It
@@ -19,8 +16,8 @@
 #'      \item{I}{Estimated value of the integral}
 #'      \item{var}{Estimated variance of the estimator}
 #' }
-#' @author Stephane Guerrier
-#' @importFrom stats runif
+#' @author Ava White
+#' @importFrom
 #' @export
 #' @examples
 #' mc_int(x_range = c(0,1), fun = "x^2", B = 10^5)

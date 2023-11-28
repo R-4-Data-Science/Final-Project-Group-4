@@ -2,9 +2,7 @@
 
 #' @title Least Squares Function
 #'
-#' @description Compute an approximation of the integral of the function f(x)
-#' with respect to dx in the range [a, b] by Monte-Carlo integration using
-#' uniform sampling.
+#' @description
 #' @param x_range A \code{vector} of dimension 2 used to denote the integration
 #' region of interest, i.e. [a, b].
 #' @param fun A \code{string} containing the function to be integrated. It

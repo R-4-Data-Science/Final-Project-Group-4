@@ -1,6 +1,6 @@
 #This is for function 3 (plotting logistic curve)
 
-#' @title Plotting Logistic Curve
+#' @title Bootstrapping
 #'
 #' @description Compute an approximation of the integral of the function f(x)
 #' with respect to dx in the range [a, b] by Monte-Carlo integration using
