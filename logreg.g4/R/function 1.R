@@ -3,22 +3,18 @@
 #' @title Logistic Regression
 #'
 #' @description Perform a logistic regression using numerical optimization
-#' to estimate the coefficient vector Beta.
-#' @param x_range A \code{vector} of dimension 2 used to denote the integration
-#' region of interest, i.e. [a, b].
-#' @param fun A \code{string} containing the function to be integrated. It
+#' to estimate the coefficient vector \code(beta).
+#' @param predict A \code{matrix} of predictor variables.
+#' @param response A \code{string} containing the function to be integrated. It
 #' is assumed that \code{x} is used as the variable of interest.
-#' @param B A \code{numeric} (integer) used to denote the number of simulations.
+#' @param beta A \code{vector} that contains the coefficients of the regression.
 #' @param seed A \code{numeric} used to control the seed of the random number
 #' generator used by this function.
 #' @return A \code{list} containing the following attributes:
 #' \describe{
-#'      \item{I}{Estimated value of the integral}
-#'      \item{var}{Estimated variance of the estimator}
-#' }
+#'      \item{B}{the estimated Beta coefficient}
 #' @author Ava White
 #' @importFrom
 #' @export
 #' @examples
-#' mc_int(x_range = c(0,1), fun = "x^2", B = 10^5)
-#' mc_int(x_range = c(0,1), fun = "x^2*sin(x^2/pi)", B = 10^5)
+#' logreg(predict = x, response = y, beta = Beta, seed = set.seed(100))

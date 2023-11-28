@@ -1,4 +1,4 @@
-#This is for function 3 (plotting logistic curve)
+#This is for function 3 (bootstrapping)
 
 #' @title Bootstrapping
 #'
@@ -17,7 +17,7 @@
 #'      \item{I}{Estimated value of the integral}
 #'      \item{var}{Estimated variance of the estimator}
 #' }
-#' @author Stephane Guerrier
+#' @author Ava White
 #' @importFrom stats runif
 #' @export
 #' @examples

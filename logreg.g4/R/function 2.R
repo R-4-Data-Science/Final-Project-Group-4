@@ -15,7 +15,7 @@
 #'      \item{I}{Estimated value of the integral}
 #'      \item{var}{Estimated variance of the estimator}
 #' }
-#' @author Stephane Guerrier
+#' @author Ava White
 #' @importFrom stats runif
 #' @export
 #' @examples
