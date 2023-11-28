@@ -1,4 +1,4 @@
-#This file is to code all of our functions.
+#This file is to code Function 1 (logistic regression).
 
 
 #copy/pasted from book to edit later:
