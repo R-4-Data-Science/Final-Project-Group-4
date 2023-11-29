@@ -12,7 +12,7 @@ logreg(x, y)
 \item{y}{A \code{vector} containing binary response variables (0 or 1).}
 }
 \value{
-A \code{vector} giving the value of \code{beta_hat}
+A \code{numeric} giving the value of \code{beta_hat}
 }
 \description{
 Perform a logistic regression using numerical optimization

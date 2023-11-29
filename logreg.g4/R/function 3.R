@@ -25,7 +25,7 @@
 bootstrap_CI <- function(x, y, alpha, bootstrap){
 
   set.seed(123)
-  n <- length(x)
+  n <- nrow(x)
   beta_boot <- matrix(NA, ncol = bootstrap, nrow = length(logreg(x, y)))
 
   #begin bootstraps
@@ -33,8 +33,8 @@ bootstrap_CI <- function(x, y, alpha, bootstrap){
 
   #sampling with replacement
    index <- sample(1:n, replace = TRUE)
-   xboot <- x[index, ]
-   yboot <- y[index, ]
+   xboot <- x[index, , drop = FALSE]
+   yboot <- y[index]
 
    beta_boot[, i] <- logreg(xboot, yboot)
   }
