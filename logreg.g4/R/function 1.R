@@ -15,15 +15,16 @@
 #' set.seed(123)
 #' n <- 200
 #' p <- 2
-#' x <- matrix(rnorm(n * p), nrow = p)
+#' x <- matrix(rnorm(n * p), nrow = n, ncol = p)
 #' y <- rbinom(n, 1, 0.5)
 #' #use logreg function to predict beta
 #' beta_hat <- logreg(x, y)
+#' print(beta_hat)
 logreg <- function(x, y){
 
   #generate initial values with least squares
   leastsquares <- function(x, y){
-  initial_values <- solve(t(x)%*%x%*%t(x)%*%y)
+  initial_values <- solve(t(x) %*% x) %*% t(x) %*% y
   return(initial_values)
   }
 
@@ -34,7 +35,7 @@ logreg <- function(x, y){
   }
 
   #compute log likelihood
-  log_likelihood <- function(yi, pi){
+  log_likelihood <- function(beta, x, y){
   pi <- probability_pi(x, beta)
   log_like <- sum(y * log(pi) + (1 - y) * log(1 - pi))
   return(log_like)
