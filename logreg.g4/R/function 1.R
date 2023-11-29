@@ -6,7 +6,7 @@
 #' to estimate the coefficient vector \code(beta) by minimizing the log-likelihood.
 #' @param x A \code{matrix} of predictor variables.
 #' @param y A \code{vector} containing binary response variables (0 or 1).
-#' @return A \code{numeric} giving the value of \code{beta_estimate}
+#' @return A \code{numeric} giving the value of \code{beta_hat}
 #' @author Ava White
 #' @author Bukola Ayodele
 #' @importFrom
@@ -17,7 +17,7 @@
 #' x <- matrix(rnorm(200), nrow = 20)
 #' y <- rnorm(200)
 #' #use logreg function to predict beta
-#' beta_estimate <- logreg(x, y)
+#' beta_hat <- logreg(x, y)
 logreg <- function(x, y){
 
   #generate initial values with least squares
@@ -34,7 +34,12 @@ logreg <- function(x, y){
 
   #compute log likelihood
   log_likelihood <- function(yi, pi){
+  pi <- probability_pi(x, beta)
   log_like <- sum(y * log(pi) + (1 - y) * log(1 - pi))
   return(log_like)
   }
+
+  result <- optim(par = leastsquares(x, y), fn = log_likelihood, x = x, y = y)
+  beta_hat <- result$par
+
 }
