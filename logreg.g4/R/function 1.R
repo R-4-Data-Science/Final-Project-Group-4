@@ -3,22 +3,35 @@
 #' @title Logistic Regression
 #'
 #' @description Perform a logistic regression using numerical optimization
-#' to estimate the coefficient vector \code(beta).
-#' @param predict A \code{matrix} of predictor variables.
-#' @param response A \code{string} containing the function to be integrated. It
-#' is assumed that \code{x} is used as the variable of interest.
+#' to estimate the coefficient vector \code(beta) by minimizing the log-likelihood.
+#' @param x A \code{matrix} of predictor variables.
+#' @param y A \code{vector} containing binary response variables (0 or 1).
 #' @param beta A \code{vector} that contains the coefficients of the regression.
-#' @param seed A \code{numeric} used to control the seed of the random number
-#' generator used by this function.
-#' @return A \code{list} containing the following attributes:
-#' \describe{
-#'      \item{B}{the estimated Beta coefficient}
+#' @return A \code{numeric} giving the value of \code{beta}
 #' @author Ava White
-#' @importFrom stats
+#' @author Bukola Ayodele
+#' @importFrom
 #' @export
 #' @examples
 #' set.seed(100)
-#' logreg(predict = x, response = y, beta = Beta)
 #' x <- matrix(rnorm(200), nrow = 20)
-#' y <-
-logreg
+#' y <- rnorm(200)
+#' beta <-
+#' logreg(x, y, beta)
+logreg <- function(x, y, beta){
+
+  #generate initial values with least squares
+  least_squares <- solve(t(x)%*%x%*%t(x)%*%y)
+
+  #compute pi
+  probability_pi <- function(x, beta){
+    pi <- 1 / (1 + exp(-x %*% beta))
+    return(pi)
+  }
+
+  #compute log likelihood
+  log_likelihood <- function(yi, pi){
+  log_like <- sum(y * log(pi) + (1 - y) * log(1 - pi))
+  return(log_like)
+  }
+}
