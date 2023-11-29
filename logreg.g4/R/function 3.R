@@ -11,14 +11,16 @@
 #' @return
 #' @author Ava White
 #' @author Bukola Ayodele
-#' @importFrom
 #' @export
 #' @examples
-#' x <-
-#' y <-
+#' #generate random data
+#' n <- 200
+#' p <- 2
+#' x <- matrix(rnorm(n * p), nrow = n, ncol = p)
+#' y <- rbinom(400)
 #' alpha <- 0.05
 #' bootstrap <- 20
-#' bootstrap_CI(x, y, alpha, bootstrap)
+#' bootstrap_result <- bootstrap_CI(x, y, alpha, bootstrap)
 bootstrap_CI <- function(x, y, alpha, bootstrap){
 
   set.seed(123)
@@ -42,7 +44,6 @@ bootstrap_CI <- function(x, y, alpha, bootstrap){
 
   #outputs
   bootstrap_result <- beta_boot
-  return(beta_boot)
   CI_result <- c(lowerbound, upperbound)
-  return(CI_result)
+  return(list(bootstrap_result = bootstrap_result, CI_result = CI_result))
 }

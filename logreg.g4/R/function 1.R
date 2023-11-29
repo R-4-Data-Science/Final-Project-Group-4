@@ -13,10 +13,10 @@
 #' @examples
 #' #generate random data
 #' set.seed(123)
-#' n <- 100
+#' n <- 200
 #' p <- 2
 #' x <- matrix(rnorm(n * p), nrow = p)
-#' y <- rbinom(200)
+#' y <- rbinom(400)
 #' #use logreg function to predict beta
 #' beta_hat <- logreg(x, y)
 logreg <- function(x, y){
