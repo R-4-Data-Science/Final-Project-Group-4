@@ -7,7 +7,7 @@
 #' @param x A \code{matrix} of predictor variables.
 #' @param y A \code{vector} containing binary response variables (0 or 1).
 #' @param beta A \code{vector} that contains the coefficients of the regression.
-#' @return A \code{numeric} giving the value of \code{beta}
+#' @return A \code{numeric} giving the value of \code{beta_estimate}
 #' @author Ava White
 #' @author Bukola Ayodele
 #' @importFrom
