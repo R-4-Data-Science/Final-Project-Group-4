@@ -16,7 +16,7 @@
 #' n <- 200
 #' p <- 2
 #' x <- matrix(rnorm(n * p), nrow = p)
-#' y <- rbinom(400)
+#' y <- rbinom(n, 1, 0.5)
 #' #use logreg function to predict beta
 #' beta_hat <- logreg(x, y)
 logreg <- function(x, y){

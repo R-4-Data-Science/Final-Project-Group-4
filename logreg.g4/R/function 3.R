@@ -6,8 +6,8 @@
 #' the logistic regression coefficients.
 #' @param x a \code{matrix} of predictor variables.
 #' @param y a \code{vector} of binary response variables.
-#' @param alpha a \code{numeric} of a significance level
-#' @param bootstrap a \code{numeric} of the number of bootstraps to be performed
+#' @param alpha the significance level
+#' @param bootstrap the number of bootstraps to be performed
 #' @return
 #' @author Ava White
 #' @author Bukola Ayodele
@@ -17,7 +17,7 @@
 #' n <- 200
 #' p <- 2
 #' x <- matrix(rnorm(n * p), nrow = n, ncol = p)
-#' y <- rbinom(400)
+#' y <- rbinom(n, 1, 0.5)
 #' alpha <- 0.05
 #' bootstrap <- 20
 #' bootstrap_result <- bootstrap_CI(x, y, alpha, bootstrap)
