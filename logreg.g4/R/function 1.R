@@ -21,8 +21,10 @@
 logreg <- function(x, y){
 
   #generate initial values with least squares
+  leastsquares <- function(x, y){
   initial_values <- solve(t(x)%*%x%*%t(x)%*%y)
-
+  return(initial_values)
+  }
 
   #compute pi
   probability_pi <- function(x, beta){
