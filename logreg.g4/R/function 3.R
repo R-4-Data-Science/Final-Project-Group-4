@@ -21,7 +21,7 @@
 #' bootstrap_CI(x, y, alpha, bootstrap)
 bootstrap_CI <- function(x, y, alpha, bootstrap){
 
-  set.seed(100)
+  set.seed(123)
   n <- length(x)
   beta_boot <- matrix(NA, ncol = bootstrap, nrow = length(logreg(x, y)))
 
