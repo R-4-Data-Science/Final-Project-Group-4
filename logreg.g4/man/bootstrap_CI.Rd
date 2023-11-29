@@ -7,24 +7,31 @@
 bootstrap_CI(x, y, alpha, bootstrap)
 }
 \arguments{
-\item{x}{a \code{matrix} of predictor variables.}
+\item{x}{A \code{matrix} of predictor variables.}
 
-\item{y}{a \code{vector} of binary response variables.}
+\item{y}{A \code{vector} of binary response variables.}
 
-\item{alpha}{a \code{numeric} of a significance level}
+\item{alpha}{The significance level}
 
-\item{bootstrap}{a \code{numeric} of the number of bootstraps to be performed}
+\item{bootstrap}{The number of bootstraps to be performed}
+}
+\value{
+A \code{numeric} giving the value of \code{bootstrap_result}
 }
 \description{
 Generate confidence intervals using a bootstrap method for
 the logistic regression coefficients.
 }
 \examples{
-x <-
-y <-
+#generate random data
+n <- 200
+p <- 2
+x <- matrix(rnorm(n * p), nrow = n, ncol = p)
+y <- rbinom(n, 1, 0.5)
 alpha <- 0.05
 bootstrap <- 20
-bootstrap_CI(x, y, alpha, bootstrap)
+bootstrap_result <- bootstrap_CI(x, y, alpha, bootstrap)
+print(bootstrap_result)
 }
 \author{
 Ava White

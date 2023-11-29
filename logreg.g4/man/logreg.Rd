@@ -12,21 +12,22 @@ logreg(x, y)
 \item{y}{A \code{vector} containing binary response variables (0 or 1).}
 }
 \value{
-A \code{numeric} giving the value of \code{beta_hat}
+A \code{vector} giving the value of \code{beta_hat}
 }
 \description{
 Perform a logistic regression using numerical optimization
-to estimate the coefficient vector \code(beta) by minimizing the log-likelihood.
+to estimate the coefficient vector \code{beta_hat} by minimizing the log-likelihood.
 }
 \examples{
 #generate random data
 set.seed(123)
-n <- 100
+n <- 200
 p <- 2
-x <- matrix(rnorm(n * p), nrow = p)
-y <- rbinom(200)
+x <- matrix(rnorm(n * p), nrow = n, ncol = p)
+y <- rbinom(n, 1, 0.5)
 #use logreg function to predict beta
 beta_hat <- logreg(x, y)
+print(beta_hat)
 }
 \author{
 Ava White

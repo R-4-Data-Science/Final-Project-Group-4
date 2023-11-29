@@ -4,11 +4,11 @@
 #'
 #' @description Generate confidence intervals using a bootstrap method for
 #' the logistic regression coefficients.
-#' @param x a \code{matrix} of predictor variables.
-#' @param y a \code{vector} of binary response variables.
-#' @param alpha the significance level
-#' @param bootstrap the number of bootstraps to be performed
-#' @return
+#' @param x A \code{matrix} of predictor variables.
+#' @param y A \code{vector} of binary response variables.
+#' @param alpha The significance level
+#' @param bootstrap The number of bootstraps to be performed
+#' @return A \code{numeric} giving the value of \code{bootstrap_result}
 #' @author Ava White
 #' @author Bukola Ayodele
 #' @export
@@ -21,6 +21,7 @@
 #' alpha <- 0.05
 #' bootstrap <- 20
 #' bootstrap_result <- bootstrap_CI(x, y, alpha, bootstrap)
+#' print(bootstrap_result)
 bootstrap_CI <- function(x, y, alpha, bootstrap){
 
   set.seed(123)
