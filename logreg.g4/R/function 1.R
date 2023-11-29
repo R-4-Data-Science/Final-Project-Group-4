@@ -6,22 +6,23 @@
 #' to estimate the coefficient vector \code(beta) by minimizing the log-likelihood.
 #' @param x A \code{matrix} of predictor variables.
 #' @param y A \code{vector} containing binary response variables (0 or 1).
-#' @param beta A \code{vector} that contains the coefficients of the regression.
 #' @return A \code{numeric} giving the value of \code{beta_estimate}
 #' @author Ava White
 #' @author Bukola Ayodele
 #' @importFrom
 #' @export
 #' @examples
+#' #generate random data
 #' set.seed(100)
 #' x <- matrix(rnorm(200), nrow = 20)
 #' y <- rnorm(200)
-#' beta <-
-#' logreg(x, y, beta)
-logreg <- function(x, y, beta){
+#' #use logreg function to predict beta
+#' beta_estimate <- logreg(x, y)
+logreg <- function(x, y){
 
   #generate initial values with least squares
-  least_squares <- solve(t(x)%*%x%*%t(x)%*%y)
+  initial_values <- solve(t(x)%*%x%*%t(x)%*%y)
+
 
   #compute pi
   probability_pi <- function(x, beta){
