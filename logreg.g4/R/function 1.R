@@ -41,5 +41,6 @@ logreg <- function(x, y){
 
   result <- optim(par = leastsquares(x, y), fn = log_likelihood, x = x, y = y)
   beta_hat <- result$par
+  return(beta_hat)
 
 }
