@@ -37,7 +37,7 @@ logreg <- function(x, y){
   #compute log likelihood
   log_likelihood <- function(beta, x, y){
   pi <- probability_pi(x, beta)
-  log_like <- sum(y * log(pi) + (1 - y) * log(1 - pi))
+  log_like <- -sum(y * log(pi) + (1 - y) * log(1 - pi))
   return(log_like)
   }
 
