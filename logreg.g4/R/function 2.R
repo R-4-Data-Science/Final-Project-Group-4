@@ -2,8 +2,8 @@
 
 #' @title Least Squares
 #'
-#' @description Generate initial values for optimization using the 'logreg'
-#' function using the least squares formula.
+#' @description Use a least squares formula to generate initial
+#' values for optimization using the 'logreg' function.
 #' @param x A \code{matrix} of predictor variables.
 #' @param y A \code{vector} containing binary response variables (0 or 1).
 #' @return A \code{numeric} giving the value of \code{initial_values}
