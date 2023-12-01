@@ -1,0 +1,54 @@
+---
+title: "Logistic Regression Vignette"
+author: "Ava White, Bukola Ayodele"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Repository web address: 
+##### ChatGPT for function outlines/help: https://chat.openai.com/share/460206ba-6cd8-4c6c-8f70-3df76ed08779
+
+# 'logreg.g4' Package
+## Logistic Regression Using Numerical Optimization
+The functions in this package can be used to perform a logistic regression using numerical optimization, run bootstrapping and generate confidence intervals, plot a fitted regression curve, and generate and plot a confusion matrix with related metrics. We will now go through how to install and use the package, discuss how each function works, and go through examples of each one. 
+
+First, we have to install our package:
+```{r}
+devtools::install_github("R-4-Data-Science/Final-Project-Group-4/logreg.g4")
+library(logreg.g4)
+```
+
+To demonstrate how our functions are used, we will first call a dataset to use as an example.
+
+
+# Function 1- Logistic Regression with Optimization ('logreg')
+
+
+
+# Function 2- Least Squares ('leastsquares')
+
+
+
+# Function 3- Bootstrapping & Confidence Intervals ('bootstrap_CI')
+
+
+
+# Function 4- Plotting a Logistic Curve ('plot_logistic_curve')
+
+
+
+# Function 5- Creating a Confusion Matrix & Similar Metrics ('matrix_metrics')
+
+
+
+# Function 6- Plotting Model Metrics ('plot_metrics')
+
+
+
+
+
+
