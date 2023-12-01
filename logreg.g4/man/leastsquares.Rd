@@ -15,8 +15,8 @@ leastsquares(x, y)
 A \code{numeric} giving the value of \code{initial_values}
 }
 \description{
-Generate initial values for optimization using the 'logreg'
-function using the least squares formula.
+Use a least squares formula to generate initial
+values for optimization using the 'logreg' function.
 }
 \examples{
 #generate random data
@@ -30,7 +30,5 @@ initial_values <- leastsquares(x, y)
 print(initial_values)
 }
 \author{
-Ava White
-
-Bukola Ayodele
+Group 4
 }

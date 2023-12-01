@@ -6,9 +6,8 @@
 #' to estimate the coefficient vector \code{beta_hat} by minimizing the log-likelihood.
 #' @param x A \code{matrix} of predictor variables.
 #' @param y A \code{vector} containing binary response variables (0 or 1).
-#' @return A \code{numeric} giving the value of \code{beta_hat}
-#' @author Ava White
-#' @author Bukola Ayodele
+#' @return A \code{double} giving the value of \code{beta_hat}
+#' @author Group 4
 #' @export
 #' @examples
 #' #generate random data
@@ -29,20 +28,21 @@ logreg <- function(x, y){
   }
 
   #compute pi
-  probability_pi <- function(x, beta){
-    pi <- 1 / (1 + exp(-x %*% beta))
+  probability_pi <- function(x, beta_hat){
+    pi <- 1 / (1 + exp(-x %*% beta_hat))
     return(pi)
   }
 
   #compute log likelihood
-  log_likelihood <- function(beta, x, y){
-  pi <- probability_pi(x, beta)
+  log_likelihood <- function(beta_hat, x, y){
+  pi <- probability_pi(x, beta_hat)
   log_like <- -sum(y * log(pi) + (1 - y) * log(1 - pi))
   return(log_like)
   }
 
-  result <- optim(par = leastsquares(x, y), fn = log_likelihood, x = x, y = y)
-  beta_hat <- result$par
-  return(beta_hat)
+  result <- optim(par = leastsquares(x, y), fn = log_likelihood,
+                  x = x, y = y, method = "BFGS")
+  beta_hat <- matrix(result$par, nrow = length(result$par), ncol = 1)
+  return(coefficients = beta_hat)
 
 }

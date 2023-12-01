@@ -3,3 +3,7 @@
 export(bootstrap_CI)
 export(leastsquares)
 export(logreg)
+export(matrix_metrics)
+export(plot_logistic_curve)
+export(plot_metrics)
+import(MASS)

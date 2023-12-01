@@ -4,7 +4,7 @@
 \alias{bootstrap_CI}
 \title{Bootstrapping}
 \usage{
-bootstrap_CI(x, y, alpha, bootstrap)
+bootstrap_CI(x, y, alpha, bootstrap = 20)
 }
 \arguments{
 \item{x}{A \code{matrix} of predictor variables.}
@@ -16,14 +16,16 @@ bootstrap_CI(x, y, alpha, bootstrap)
 \item{bootstrap}{The number of bootstraps to be performed}
 }
 \value{
-A \code{numeric} giving the value of \code{bootstrap_result}
+A \code{list} giving the values of \code{bootstrap_result} and
+\code{CI_result}
 }
 \description{
-Generate confidence intervals using a bootstrap method for
-the logistic regression coefficients.
+Complete a bootstrap with a defined number of bootstraps and
+significance level (alpha) and generate confidence intervals.
 }
 \examples{
 #generate random data
+set.seed(123)
 n <- 200
 p <- 2
 x <- matrix(rnorm(n * p), nrow = n, ncol = p)
@@ -34,7 +36,5 @@ bootstrap_result <- bootstrap_CI(x, y, alpha, bootstrap)
 print(bootstrap_result)
 }
 \author{
-Ava White
-
-Bukola Ayodele
+Group 4
 }
