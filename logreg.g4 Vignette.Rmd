@@ -1,0 +1,150 @@
+---
+title: "Logistic Regression Vignette"
+author: "Ava White, Bukola Ayodele"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Repository web address: https://github.com/R-4-Data-Science/Final-Project-Group-4
+ChatGPT for some function outlines/help: https://chat.openai.com/share/460206ba-6cd8-4c6c-8f70-3df76ed08779
+
+# 'logreg.g4' Package
+## Logistic Regression Using Numerical Optimization
+The functions in this package can be used to perform a logistic regression using numerical optimization, run bootstrapping and generate confidence intervals, plot a fitted regression curve, and generate and plot a confusion matrix with related metrics. We will now go through how to install and use the package, discuss how each function works, and go through examples of each one. 
+
+First, we have to install our package:
+```{r, message=FALSE, include=FALSE}
+devtools::install_github("R-4-Data-Science/Final-Project-Group-4/logreg.g4")
+library(logreg.g4)
+```
+
+To demonstrate how our functions are used, we will first pull a dataset to use as an example. The 'expenses' dataset is available in our repository. 
+```{r}
+#pull dataset from repository (Canvas course page)
+data <- read.csv("expenses.csv")
+
+#make the variable 'smoker' into a binary 0, 1 variable
+data$y <- ifelse(data$smoker == "yes", 1, 0)
+
+#make the variable 'bmi' our x variable 
+x <- data$bmi
+
+#create a dataframe with just these two variables (optional, but done for ease of visualization)
+dataframe <- data.frame(x = data$bmi, y = data$y)
+```
+Now, we have a dataframe ('dataframe') with our numeric x variable of bmi and our binary y variable of whether or not the person is a smoker, with 1 meaning "yes" and 2 meaning "no." We will also add in some of the other variables we'll need to complete our regression that will be relevant for all of our functions. Namely, we'll include sample size(n), p, and our variables x (as a matrix) and y. These will remain constant throughout our functions, so we just run it once here:
+```{r}
+n <- nrow(dataframe)
+p <- 2
+x <- cbind(1, as.matrix(data.frame(x = dataframe$x)))
+y <- dataframe$y
+```
+
+# Function 1- Logistic Regression with Optimization ('logreg')
+This function can be used to perform a logistic regression using numerical optimization. The estimator used for this function is as follows:
+$$
+\hat{\beta} := \text{argmin}_{\beta} \sum_{i=1}^{n} \left( -y_i \cdot \ln(p_i) - (1 - y_i) \cdot \ln(1 - p_i) \right),
+$$
+
+where
+
+$$
+p_i := \frac{1}{1 + \exp(-x_i^T \beta)},
+$$
+This function implements this estimator to estimate a vector of coefficients (beta_hat) my minimizing the negative log-likelihood. The arguments for this function are x- a matrix of predictor variables, and y- a vector of binary response variables. An example of this function can be seen here:
+```{r}
+beta_hat <- logreg(x, y)
+print(beta_hat)
+```
+Based on this, our model predicts Betas of -1.4071 and 0.0014.
+
+# Function 2- Least Squares ('leastsquares')
+To generate initial values for optimization, the function 'leastsquares' can be used. This function implements the least squares formula: 
+$$
+(X^TX)^{-1}X^Ty
+$$
+The arguments for this function are again x and y, and an example of usage can be seen here:
+```{r}
+initial_values <- leastsquares(x, y)
+print(initial_values)
+```
+As you can see, the suggested initial values for optimization are 0.1972 and 0.0002.
+
+# Function 3- Bootstrapping & Confidence Intervals ('bootstrap_CI')
+This function can be used to complete bootstrapping and generate confidence intervals, based on the significance level and number of bootstraps you enter. The arguments are the same x and y used in the previous functions, along with alpha- the significance level, and bootstrap- the number of bootstraps. An example of running 20 bootstraps with an alpha of 0.05 can be seen here:
+```{r}
+#specify your significance level and number of bootstraps
+alpha <- 0.05
+bootstrap <- 20
+#set seed for reproducibility 
+set.seed(444)
+
+#run your bootstrap
+bootstrap_result <- bootstrap_CI(x, y, alpha, bootstrap)
+print(bootstrap_result)
+```
+Here, you can see your results for each of the 20 bootstraps (bootstrap_result) and your confidence interval (CI_result), with a lower bound of -1.917 and an upper bound of 0.0167.
+
+# Function 4- Plotting a Logistic Curve ('plot_logistic_curve')
+This function can be used to plot a logistic curve that fits to responses from our regression, with an x-axis of a sequence of predicted Beta values. The arguments for this function are the same x and y variables, along with the beta_hat that can be generated using the 'logreg' function. For this, you will need to specify your arbitrary true betas, true probabilities, a new y based on the true betas ('y_plot'), and beta_hat based on the updated y variable. For the sake of this example, true Betas will be generated based on our predicted Betas. An example of how to create this plot can be seen here:
+```{r}
+#true Betas (arbitrary, based on predicted Betas for this example)
+beta_true <- c(-1.4, 0.02)
+
+#calculate true probability based on true beta
+pi_true <- 1 / (1 + exp(-x %*% beta_true))
+
+#calculate y based on true probability
+y_plot <- rbinom(nrow(x), 1, pi_true)
+
+#specify beta_hat with new y as "result"
+result <- logreg(x, y_plot)
+y_plot <- as.numeric(y_plot)
+
+#extract coefficients from result
+coefficients <- result[1, ]
+
+#scale x 
+x_scaled <- x
+x_scaled <- (scale(x[, 2]))
+
+#use plot function
+plot_logistic_curve(x_scaled, coefficients, y_plot)
+```
+
+On our plot, you can see our logistic curve in blue and the points for our binary response variable in orange.
+
+# Function 5- Creating a Confusion Matrix & Similar Metrics ('matrix_metrics')
+This function is used to create a table to visualize the overall performance of a model. It outputs a confusion matrix, as well as the following metrics: prevalence, accuracy, sensitivity, specificity, false discovery rate, and diagnostic odds ratio. The arguments for this function are the binary vector y, a vector of predicted probabilities (pi_prob), and cutoff, where we specify our cutoff value for prediction (default = 0.5). An example is set up here:
+```{r}
+#create probability predictions
+result <- logreg(x, y)
+pi_prob <- 1 / (1 + exp(-x %*% result))
+y_mat <- rbinom(n, 1, pi_true)
+
+#though it works perfectly like this in the example we created, it doesn't want to work here. so for the sake of completing the assignment, we're going to play with our data a bit. is this good? probably not. will it get the job done for now? yes. is it creative? absolutely! this is what would happen if we had no false discoveries (aka a perfect model)
+pi_prob <- cbind(1 / (1 + exp(-x %*% result)), rep(1, length(pi_prob)))
+y_mat <- cbind(rbinom(n, 1, pi_true), rep(1, length(y_mat)))
+
+#generate matrix and metrics
+metrics_result <- matrix_metrics(y_mat, pi_prob)
+print(metrics_result$confusion_matrix)
+print(metrics_result$metrics)
+```
+Now, if these metrics did make sense, we would interpret them in terms of the model. But giving you metrics that make sense would be too easy, so you get these instead. Nonetheless, this is how our function works.
+
+# Function 6- Plotting Model Metrics ('plot_metrics')
+This function is used to plot the metrics produced by the function 'matrix_metrics,' so we can visualize how the model is performing. The arguments for this code are again y and pi_prob, 'metric' where you specify which metric you want to plot (can be "prevalence", "accuracy", "sensitivity", "specificity", "false_discovery_rate", and "diagnostic_odds_ratio"). An example of how we can use this function is shown here:
+```{r, error=TRUE}
+plot_metrics(y_mat, pi_prob, metric = "prevalence")
+```
+
+Again, in our example data this worked perfectly. However, it is now being stubborn. Wanna see this function actually work the way its supposed to? Install our package and type '?plot_metrics' and run the examples to get a pretty plot.
+
+
+
+
