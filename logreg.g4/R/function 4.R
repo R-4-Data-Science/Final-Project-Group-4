@@ -22,7 +22,7 @@
 #' plot_logistic_curve(x, result, y)
 plot_logistic_curve <- function(x, beta_hat, y) {
   x_range <- seq(min(x %*% beta_hat), max(x %*% beta_hat), length.out = 100)
-  fitted_probs <- 1 / (1 + exp(-x_range, y))
+  fitted_probs <- 1 / (1 + exp(-x_range))
   plot(x_range, fitted_probs, type = "l", col = "blue",
        lwd = 3, xlab = "X Beta", ylab = "Probability (y)",
        main = "Fitted Logistic Curve")
