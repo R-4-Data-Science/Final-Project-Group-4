@@ -4,9 +4,9 @@
 #'
 #' @description Plot a logistic curve that fits to the responses from a logistic
 #' regression, where the x-axis represents a sequence of predicted beta values.
-#' @param x A code\matrix of predictor variables.
-#' @param y A code\vector of binary response variables.
-#' @param beta_hat A code\vector of regression coefficients.
+#' @param x A \code{matrix} of predictor variables.
+#' @param y A \code{vector} of binary response variables.
+#' @param beta_hat A \code{vector} of regression coefficients.
 #' @return A plot of a fitted logistic curve.
 #' @author Group 4
 #' @import MASS

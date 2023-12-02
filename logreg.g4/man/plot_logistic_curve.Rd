@@ -7,11 +7,11 @@
 plot_logistic_curve(x, beta_hat, y)
 }
 \arguments{
-\item{x}{A code\matrix of predictor variables.}
+\item{x}{A \code{matrix} of predictor variables.}
 
-\item{beta_hat}{A code\vector of regression coefficients.}
+\item{beta_hat}{A \code{vector} of regression coefficients.}
 
-\item{y}{A code\vector of binary response variables.}
+\item{y}{A \code{vector} of binary response variables.}
 }
 \value{
 A plot of a fitted logistic curve.
